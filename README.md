@@ -17,6 +17,16 @@ Picks and the per-scan dielectric are saved in the browser's `localStorage`, key
 - **Export picks (CSV)** – every pick on every listed scan: distance, depth, two-way time, dielectric.
 - **Export scan (JSON)** – the current scan's picks in the desktop app's `plugins/analyze/picks/<name>.json` layout.
 
+## Analysis panel
+
+The **Analysis** checkbox shows a panel under the scan, lined up with it trace for trace. It works on a depth band, drawn as two dashed lines on the scan that can be dragged.
+
+- **Band energy** – strength of the reflections inside the band along the scan, in dB relative to the scan's median. Bars and other reflectors stand out as peaks; weak or attenuated stretches sit low.
+- **Spectral centroid** – the centre frequency of the band's signal along the scan, in GHz. A drop means the high frequencies are being lost.
+- **Spectrum** (side panel) – the frequency content of the band at the cursor or at the selected pick, with its centroid, peak and bandwidth.
+
+"Average ±" sets how far along the scan each reading is averaged. The processing is the desktop app's (trace DC removal, running-median background removal, Hilbert envelope) and gives the same numbers. Scans over about 3 million samples are analysed on every second or third trace to keep the page responsive.
+
 ## Trying it
 
 Open `index.html` in a browser, or serve the folder from any static host (GitHub Pages works).
@@ -41,4 +51,5 @@ Saving picks to the subscriber's account needs one small PHP endpoint (store and
 
 - GSSI DZT only. 32-bit files are checked against the desktop reader; 16-bit and 8-bit files are read but have not been tested on real data.
 - Single-channel scans.
-- Manual picking only; no automatic detection, migration or feature analysis.
+- Manual picking only; no automatic detection, migration or per-pick feature table.
+- The spectral centroid is taken over 0.3 to 5 GHz, which suits the high-frequency antennas used on concrete. Lower-frequency antennas would need that range changed (`MOMENT_BAND_GHZ` in `gpr-viewer.js`).

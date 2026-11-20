@@ -57,6 +57,10 @@
 .gprv-tools label { white-space: nowrap; }
 .gprv-wrap { flex: 1; min-height: 240px; position: relative; border: 1px solid var(--gprv-line); border-radius: 5px; overflow: hidden; background: var(--gprv-panel); }
 .gprv-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; }
+.gprv .gprv-awrap { flex: 0 0 30%; min-height: 130px; }
+.gprv-group { display: flex; flex-direction: column; gap: 8px; }
+.gprv-spec { position: relative; height: 130px; flex: none; border: 1px solid var(--gprv-line); border-radius: 5px; overflow: hidden; }
+.gprv-spec canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .gprv-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; min-height: 1.4em; font-variant-numeric: tabular-nums; }
 .gprv-status { color: #a4480f; }
 .gprv-help { font-size: 12px; }
@@ -79,7 +83,8 @@
   .gprv-main { flex-direction: column; }
   .gprv-side, .gprv-right { width: auto; border: 0; border-bottom: 1px solid var(--gprv-line); }
   .gprv-scans { flex-direction: row; flex-wrap: wrap; }
-  .gprv-wrap { min-height: 60vh; flex: none; }
+  .gprv-wrap { min-height: 50vh; flex: none; }
+  .gprv .gprv-awrap { min-height: 180px; }
   .gprv-tablewrap { max-height: 260px; }
   .gprv-help { display: none; }
 }

@@ -37,16 +37,18 @@
         <button type="button" id="gprv-fit">Fit</button>
         <label><input type="checkbox" id="gprv-pickMode"> Pick rebar</label>
         <label title="Move each click to the strongest peak within about 1/4 in"><input type="checkbox" id="gprv-snap"> Snap to peak</label>
+        <label title="Show the band energy / spectrum panel"><input type="checkbox" id="gprv-analysis"> Analysis</label>
         <button type="button" id="gprv-undo">Undo</button>
         <button type="button" id="gprv-delete">Delete pick</button>
         <span id="gprv-info" class="gprv-hint"></span>
       </div>
       <div id="gprv-wrap" class="gprv-wrap"><canvas id="gprv-canvas"></canvas></div>
+      <div id="gprv-awrap" class="gprv-wrap gprv-awrap"><canvas id="gprv-acanvas"></canvas></div>
       <div class="gprv-foot">
         <span id="gprv-readout"></span>
         <span id="gprv-status" class="gprv-status" role="status"></span>
       </div>
-      <p class="gprv-hint gprv-help">Click to pick · click a pick to select it · right-click or Delete removes it · drag to pan · wheel zooms along the scan · Shift+wheel zooms depth · ↑/↓ changes scan</p>
+      <p class="gprv-hint gprv-help">Click to pick · click a pick to select it · right-click or Delete removes it · drag to pan · wheel zooms along the scan · Shift+wheel zooms depth · drag a dashed line to move the analysis band · ↑/↓ changes scan</p>
     </section>
 
     <aside class="gprv-side gprv-right">
@@ -63,6 +65,19 @@
         <span><input type="number" id="gprv-eps" min="1" max="81" step="0.1"> <button type="button" id="gprv-epsReset" title="Back to the value in the file">Reset</button></span>
       </label>
       <label class="gprv-check"><input type="checkbox" id="gprv-invert"> Invert polarity</label>
+
+      <div id="gprv-apanel" class="gprv-group">
+        <h2>Analysis</h2>
+        <label class="gprv-row">Profile
+          <select id="gprv-profile"><option value="energy">Band energy</option><option value="centroid">Spectral centroid</option></select>
+        </label>
+        <label class="gprv-row">Average ±
+          <span><input type="number" id="gprv-smooth" min="0" step="any"> <span id="gprv-smoothUnit"></span></span>
+        </label>
+        <p id="gprv-bandText" class="gprv-hint"></p>
+        <div class="gprv-spec"><canvas id="gprv-spec"></canvas></div>
+        <p id="gprv-specText" class="gprv-hint"></p>
+      </div>
 
       <h2>Picks</h2>
       <p id="gprv-stats" class="gprv-hint"></p>
