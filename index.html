@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPR Viewer</title>
+<link rel="stylesheet" href="gpr-viewer.css">
+<style>html, body { margin: 0; height: 100%; }</style>
+</head>
+<body>
+
+<!-- Everything between the two markers can be pasted into a PHP page as is. -->
+<!-- GPR VIEWER START -->
+<div id="gprv" class="gprv">
+  <header class="gprv-bar">
+    <strong class="gprv-title">GPR Viewer</strong>
+    <button type="button" id="gprv-openFiles" class="gprv-primary">Open scans…</button>
+    <button type="button" id="gprv-openFolder">Open folder…</button>
+    <input type="file" id="gprv-files" multiple accept=".dzt,.dzx,.DZT,.DZX" hidden>
+    <input type="file" id="gprv-folder" webkitdirectory hidden>
+    <span class="gprv-spacer"></span>
+    <button type="button" id="gprv-csv">Export picks (CSV)</button>
+    <button type="button" id="gprv-json" title="This scan's picks in the desktop app's format">Export scan (JSON)</button>
+  </header>
+
+  <div class="gprv-main">
+    <aside class="gprv-side">
+      <h2>Scans</h2>
+      <p id="gprv-empty" class="gprv-hint">Open GSSI <b>.DZT</b> files (select the matching <b>.DZX</b> files too, they carry the dielectric), or drop them anywhere on this page. Files are read on your computer and are not uploaded.</p>
+      <div id="gprv-scanList" class="gprv-scans"></div>
+    </aside>
+
+    <section class="gprv-center">
+      <div class="gprv-tools">
+        <button type="button" id="gprv-zoomIn" title="Zoom in">+</button>
+        <button type="button" id="gprv-zoomOut" title="Zoom out">−</button>
+        <button type="button" id="gprv-fit">Fit</button>
+        <label><input type="checkbox" id="gprv-pickMode"> Pick rebar</label>
+        <label title="Move each click to the strongest peak within about 1/4 in"><input type="checkbox" id="gprv-snap"> Snap to peak</label>
+        <button type="button" id="gprv-undo">Undo</button>
+        <button type="button" id="gprv-delete">Delete pick</button>
+        <span id="gprv-info" class="gprv-hint"></span>
+      </div>
+      <div id="gprv-wrap" class="gprv-wrap"><canvas id="gprv-canvas"></canvas></div>
+      <div class="gprv-foot">
+        <span id="gprv-readout"></span>
+        <span id="gprv-status" class="gprv-status" role="status"></span>
+      </div>
+      <p class="gprv-hint gprv-help">Click to pick · click a pick to select it · right-click or Delete removes it · drag to pan · wheel zooms along the scan · Shift+wheel zooms depth · ↑/↓ changes scan</p>
+    </section>
+
+    <aside class="gprv-side gprv-right">
+      <h2>Display</h2>
+      <label class="gprv-row">Depth gain <input type="range" id="gprv-depthGain" min="0" max="6" step="0.1"></label>
+      <label class="gprv-row">Contrast <input type="range" id="gprv-contrast" min="0.3" max="6" step="0.1" class="gprv-rev"></label>
+      <label class="gprv-row">Colors
+        <select id="gprv-colormap"><option value="gray">Gray</option><option value="seismic">Blue / red</option><option value="hot">Hot</option></select>
+      </label>
+      <label class="gprv-row">Units
+        <select id="gprv-unit"><option value="in">in</option><option value="ft">ft</option><option value="mm">mm</option><option value="cm">cm</option><option value="m">m</option></select>
+      </label>
+      <label class="gprv-row">Dielectric
+        <span><input type="number" id="gprv-eps" min="1" max="81" step="0.1"> <button type="button" id="gprv-epsReset" title="Back to the value in the file">Reset</button></span>
+      </label>
+      <label class="gprv-check"><input type="checkbox" id="gprv-invert"> Invert polarity</label>
+
+      <h2>Picks</h2>
+      <p id="gprv-stats" class="gprv-hint"></p>
+      <div class="gprv-tablewrap">
+        <table class="gprv-table">
+          <thead><tr id="gprv-pickHead"></tr></thead>
+          <tbody id="gprv-pickBody"></tbody>
+        </table>
+      </div>
+      <button type="button" id="gprv-clear">Clear this scan's picks</button>
+    </aside>
+  </div>
+</div>
+<script src="gpr-viewer.js"></script>
+<!-- GPR VIEWER END -->
+
+</body>
+</html>
