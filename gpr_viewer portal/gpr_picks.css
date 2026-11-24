@@ -1,0 +1,129 @@
+/* All rules are scoped under .gprv so the viewer can sit inside another page. */
+.gprv {
+  --gprv-bg: #eef1f5;
+  --gprv-panel: #ffffff;
+  --gprv-ink: #1c2530;
+  --gprv-muted: #647184;
+  --gprv-line: #c9d1dc;
+  --gprv-accent: #1f6fb2;
+  display: flex; flex-direction: column;
+  height: 100vh; min-height: 520px;
+  background: var(--gprv-bg); color: var(--gprv-ink);
+  font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-sizing: border-box;
+}
+.gprv *, .gprv *::before, .gprv *::after { box-sizing: inherit; }
+.gprv [hidden] { display: none !important; }
+
+.gprv button, .gprv select, .gprv input[type="number"] {
+  font: inherit; color: inherit;
+  background: var(--gprv-panel); border: 1px solid var(--gprv-line);
+  border-radius: 5px; padding: 4px 10px;
+}
+.gprv button { cursor: pointer; }
+.gprv button:hover { border-color: var(--gprv-accent); }
+.gprv button:focus-visible, .gprv input:focus-visible, .gprv select:focus-visible {
+  outline: 2px solid var(--gprv-accent); outline-offset: 1px;
+}
+.gprv .gprv-primary { background: var(--gprv-accent); border-color: var(--gprv-accent); color: #fff; }
+.gprv input[type="number"] { width: 5em; padding: 4px 6px; }
+
+.gprv-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 8px 12px; background: var(--gprv-panel); border-bottom: 1px solid var(--gprv-line);
+}
+.gprv-title { font-size: 16px; margin-right: 8px; }
+.gprv-proj {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  padding: 6px 12px; background: var(--gprv-bg); border-bottom: 1px solid var(--gprv-line);
+}
+.gprv-proj .gprv-hint { flex: 1 1 260px; }
+.gprv .gprv-proj select { max-width: 300px; }
+.gprv-job { display: flex; align-items: center; gap: 6px; white-space: nowrap; font-weight: 600; }
+.gprv .gprv-scan.is-missing { font-style: italic; color: var(--gprv-muted); }
+.gprv .gprv-job input { font: inherit; color: inherit; width: 9em; padding: 4px 6px; background: var(--gprv-panel); border: 1px solid var(--gprv-line); border-radius: 5px; }
+.gprv-spacer { flex: 1; }
+.gprv-tabs { display: flex; margin-right: 8px; }
+.gprv .gprv-tabs button { border-radius: 0; margin-left: -1px; }
+.gprv .gprv-tabs button:first-child { border-radius: 5px 0 0 5px; margin-left: 0; }
+.gprv .gprv-tabs button:last-child { border-radius: 0 5px 5px 0; }
+.gprv .gprv-tabs .is-current { background: var(--gprv-ink); border-color: var(--gprv-ink); color: var(--gprv-panel); }
+.gprv .gprv-place { width: 430px; display: flex; flex-direction: column; gap: 8px; }
+.gprv .gprv-ptable tbody tr { cursor: default; }
+.gprv .gprv-ptable td { padding: 2px 4px; }
+.gprv .gprv-ptable .gprv-name { text-align: left; overflow-wrap: anywhere; }
+.gprv .gprv-ptable input { width: 5.6em; text-align: right; }
+.gprv .gprv-ptable select { padding: 4px; }
+
+.gprv-main { flex: 1; display: flex; min-height: 0; }
+.gprv-side {
+  width: 220px; flex: none; padding: 10px 12px; overflow-y: auto;
+  background: var(--gprv-panel); border-right: 1px solid var(--gprv-line);
+}
+.gprv-right { width: 270px; border-right: 0; border-left: 1px solid var(--gprv-line); display: flex; flex-direction: column; gap: 8px; }
+.gprv-side h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--gprv-muted); margin: 6px 0 4px; }
+.gprv-hint { color: var(--gprv-muted); font-size: 12.5px; margin: 0; }
+
+.gprv-scans { display: flex; flex-direction: column; gap: 2px; }
+.gprv .gprv-scan {
+  display: flex; justify-content: space-between; gap: 8px; text-align: left;
+  border-color: transparent; background: none; padding: 4px 8px; overflow-wrap: anywhere;
+}
+.gprv .gprv-scan.is-current { background: var(--gprv-accent); color: #fff; }
+.gprv-count { font-variant-numeric: tabular-nums; opacity: .8; }
+
+.gprv-center { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 8px 10px; gap: 6px; }
+.gprv-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; }
+.gprv-tools label { white-space: nowrap; }
+.gprv-wrap { flex: 1; min-height: 240px; position: relative; border: 1px solid var(--gprv-line); border-radius: 5px; overflow: hidden; background: var(--gprv-panel); }
+.gprv-wrap canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: crosshair; }
+.gprv .gprv-awrap { flex: 0 0 30%; min-height: 130px; }
+.gprv-group { display: flex; flex-direction: column; gap: 8px; }
+.gprv-spec { position: relative; height: 130px; flex: none; border: 1px solid var(--gprv-line); border-radius: 5px; overflow: hidden; }
+.gprv-spec canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.gprv .gprv-v3wrap canvas { cursor: grab; }
+.gprv .gprv-v3wrap canvas.is-dragging { cursor: grabbing; }
+.gprv .gprv-tools select { padding: 4px 6px; }
+.gprv-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; min-height: 1.4em; font-variant-numeric: tabular-nums; }
+.gprv-status { color: #a4480f; }
+.gprv-help { font-size: 12px; }
+
+.gprv-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.gprv-row input[type="range"] { width: 130px; }
+.gprv-rev { direction: rtl; } /* a smaller clamp is more contrast, so slide right for more */
+.gprv-check { display: block; }
+
+.gprv-tablewrap { flex: 1; min-height: 120px; overflow: auto; border: 1px solid var(--gprv-line); border-radius: 5px; }
+.gprv-table { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.gprv-table th, .gprv-table td { padding: 3px 8px; text-align: right; }
+.gprv-table th { position: sticky; top: 0; background: var(--gprv-bg); font-weight: 600; }
+.gprv-table tbody tr { cursor: pointer; }
+.gprv-table tbody tr:hover { background: var(--gprv-bg); }
+.gprv-table tr.is-selected { background: #ffe9a3; }
+
+@media (max-width: 900px) {
+  .gprv { height: auto; }
+  .gprv-main { flex-direction: column; }
+  .gprv-side, .gprv-right { width: auto; border: 0; border-bottom: 1px solid var(--gprv-line); }
+  .gprv-scans { flex-direction: row; flex-wrap: wrap; }
+  .gprv-wrap { min-height: 50vh; flex: none; }
+  .gprv .gprv-awrap { min-height: 180px; }
+  .gprv-tablewrap { max-height: 260px; }
+  .gprv-help { display: none; }
+}
+
+/* Staff portal page shell (tools/gpr/gpr_viewer.php): header strip above the viewer. */
+.gprp-page { margin: 0; height: 100vh; display: flex; flex-direction: column; }
+.gprp-page .gprv { flex: 1 1 auto; height: auto; }
+.gprp-header {
+  flex: none; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px;
+  padding: 8px 14px; background: #1c2530; color: #fff;
+  font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.gprp-brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+.gprp-logo { font-weight: 700; font-size: 16px; }
+.gprp-crumb { color: #b9c4d2; }
+.gprp-user { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.gprp-btn { color: #fff; text-decoration: none; border: 1px solid #55657a; border-radius: 5px; padding: 3px 10px; }
+.gprp-btn:hover, .gprp-btn:focus-visible { border-color: #fff; }
+@media (max-width: 900px) { .gprp-page { height: auto; } }

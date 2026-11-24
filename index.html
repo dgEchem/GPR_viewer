@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPR Viewer</title>
-<link rel="stylesheet" href="gpr-viewer.css">
+<link rel="stylesheet" href="gpr_viewer%20portal/gpr_picks.css?v=5">
 <style>html, body { margin: 0; height: 100%; }</style>
 </head>
 <body>
@@ -14,6 +14,11 @@
 <div id="gprv" class="gprv">
   <header class="gprv-bar">
     <strong class="gprv-title">GPR Viewer</strong>
+    <span class="gprv-tabs">
+      <button type="button" id="gprv-tabScan" class="is-current">Scan</button>
+      <button type="button" id="gprv-tabMap">Map</button>
+      <button type="button" id="gprv-tab3d">3D</button>
+    </span>
     <button type="button" id="gprv-openFiles" class="gprv-primary">Open scans…</button>
     <button type="button" id="gprv-openFolder">Open folder…</button>
     <input type="file" id="gprv-files" multiple accept=".dzt,.dzx,.DZT,.DZX" hidden>
@@ -23,7 +28,7 @@
     <button type="button" id="gprv-json" title="This scan's picks in the desktop app's format">Export scan (JSON)</button>
   </header>
 
-  <div class="gprv-main">
+  <div id="gprv-scanView" class="gprv-main">
     <aside class="gprv-side">
       <h2>Scans</h2>
       <p id="gprv-empty" class="gprv-hint">Open GSSI <b>.DZT</b> files (select the matching <b>.DZX</b> files too, they carry the dielectric), or drop them anywhere on this page. Files are read on your computer and are not uploaded.</p>
@@ -90,8 +95,57 @@
       <button type="button" id="gprv-clear">Clear this scan's picks</button>
     </aside>
   </div>
+
+  <div id="gprv-mapView" class="gprv-main" hidden>
+    <aside class="gprv-side gprv-place">
+      <h2>Scan positions</h2>
+      <p class="gprv-hint">Where each scan starts on the surface and which way it runs. Positions are in <b id="gprv-posUnit"></b> (change it under Units on the Scan tab).</p>
+      <div class="gprv-tools">
+        <button type="button" id="gprv-posImport">Import CSV…</button>
+        <button type="button" id="gprv-posExport">Export CSV</button>
+        <input type="file" id="gprv-posFile" accept=".csv,text/csv" hidden>
+      </div>
+      <p id="gprv-mapStatus" class="gprv-status" role="status"></p>
+      <div class="gprv-tablewrap">
+        <table class="gprv-table gprv-ptable">
+          <thead><tr><th>Scan</th><th>Start X</th><th>Start Y</th><th>Direction</th><th>Picks</th></tr></thead>
+          <tbody id="gprv-placeBody"></tbody>
+        </table>
+      </div>
+      <p class="gprv-hint">CSV columns: <b>Scan</b> (file name or number), <b>Origin X</b>, <b>Origin Y</b>, <b>Direction</b> (+X, −X, +Y or −Y).</p>
+    </aside>
+    <section class="gprv-center">
+      <div class="gprv-tools">
+        <button type="button" id="gprv-mapFit">Fit</button>
+        <span id="gprv-mapSummary" class="gprv-hint"></span>
+      </div>
+      <div id="gprv-mapWrap" class="gprv-wrap"><canvas id="gprv-mapCanvas"></canvas></div>
+      <div class="gprv-foot"><span id="gprv-mapReadout"></span></div>
+      <p class="gprv-hint gprv-help">Each pick is a short bar across its scan line, darker for deeper cover · drag to pan · wheel to zoom · click a pick to open it in its scan</p>
+    </section>
+  </div>
+  <div id="gprv-view3d" class="gprv-main" hidden>
+    <section class="gprv-center">
+      <div class="gprv-tools">
+        <button type="button" id="gprv-v3Reset" title="Back to the starting angle, fitted to the window">Reset view</button>
+        <button type="button" id="gprv-v3Fit" title="Fit to the window, keeping this angle">Fit</button>
+        <button type="button" id="gprv-v3Top" title="From above, as on the Map tab">Top</button>
+        <button type="button" id="gprv-v3Front" title="From the side, looking along Y">Front</button>
+        <button type="button" id="gprv-v3Side" title="From the side, looking along X">Side</button>
+        <label title="How much depth is stretched so cover differences can be seen">Z Scale <select id="gprv-v3Z"></select></label>
+        <label title="A line from each pick up to the surface"><input type="checkbox" id="gprv-v3Drops"> Drop lines</label>
+        <label><input type="checkbox" id="gprv-v3Grid"> Grid + axes</label>
+        <label title="Hang the current scan's radargram under its scan line"><input type="checkbox" id="gprv-v3Radar"> Radargram of current scan</label>
+        <button type="button" id="gprv-v3Png" title="Save this view as a picture">Save PNG</button>
+        <span id="gprv-v3Summary" class="gprv-hint"></span>
+      </div>
+      <div id="gprv-v3Wrap" class="gprv-wrap gprv-v3wrap"><canvas id="gprv-v3Canvas"></canvas></div>
+      <div class="gprv-foot"><span id="gprv-v3Readout"></span></div>
+      <p class="gprv-hint gprv-help">Each pick is a short bar at its cover depth, darker for deeper cover · drag to rotate · Shift+drag or right-drag to pan · wheel to zoom · click a pick to open it in its scan · click a scan line to make it the current scan · scan positions come from the Map tab</p>
+    </section>
+  </div>
 </div>
-<script src="gpr-viewer.js"></script>
+<script src="gpr_viewer%20portal/gpr_picks.js?v=5"></script>
 <!-- GPR VIEWER END -->
 
 </body>
